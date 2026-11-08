@@ -1,0 +1,79 @@
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const STORE="business-tools-suite-v1";
+const dimensions={
+ D:{name:"D｜主導・推進",short:"D",color:"#e26954",lead:"成果に向けて前進する推進型",strength:"決断・スピード・難題への挑戦を活かしやすい傾向があります。",tip:"結論と優先順位を先に共有し、相手の意見を確認すると協力を得やすくなります。"},
+ I:{name:"I｜感化・交流",short:"I",color:"#dfac39",lead:"周囲を巻き込む交流型",strength:"アイデアの共有・対話・場の活性化に強みが出やすい傾向があります。",tip:"熱意に加えて期限と担当者を明確にすると、実行につながりやすくなります。"},
+ S:{name:"S｜安定・協調",short:"S",color:"#30a38c",lead:"チームを支える協調型",strength:"傾聴・継続的な支援・周囲への配慮に強みが出やすい傾向があります。",tip:"遠慮せず自分の懸念や希望も言語化すると、変化に対応しやすくなります。"},
+ C:{name:"C｜慎重・分析",short:"C",color:"#5375dd",lead:"品質を高める分析型",strength:"情報確認・計画・精度へのこだわりが強みになりやすい傾向があります。",tip:"完璧を目指す前に、判断期限と必要な精度を合意すると前進しやすくなります。"}
+};
+const questions=[
+["不確実でも必要な決断を素早くできる","D"],["新しいメンバーとすぐ打ち解ける","I"],["相手の話を落ち着いて最後まで聞く","S"],["判断前にデータや根拠を確かめる","C"],
+["困難な目標に挑戦するのが好きだ","D"],["自分のアイデアを周囲に話すのが好きだ","I"],["困っている同僚を継続して支える","S"],["ミスや抜け漏れに気づきやすい","C"],
+["意見が違うときは自分の考えを明確に伝える","D"],["チームの雰囲気を盛り上げるのが得意だ","I"],["急な変化より安定した進め方を好む","S"],["作業手順を丁寧に組み立てたい","C"],
+["成果とスピードを強く意識して動く","D"],["対話を通じて相手の意欲を引き出せる","I"],["チームで協力して進めることを大切にする","S"],["細かな品質基準まで満たしたい","C"]
+];
+const prompts={
+ progress:["最近、うまく進んだ仕事は何ですか？","今週いちばん達成感があったことは何ですか？","今の業務で最も優先したい成果は何ですか？","期待される役割は明確になっていますか？"],
+ blockers:["進めるうえで障害になっていることは何ですか？","私が取り除ける課題や調整事項はありますか？","判断待ちになっている案件はありますか？","仕事量や優先順位に無理はありませんか？"],
+ growth:["次に身につけたいスキルは何ですか？","最近、成長したと感じた場面はありますか？","任せてみたい仕事や挑戦したい役割はありますか？","今後3か月で経験してみたいことは何ですか？"],
+ teamwork:["他のチームとの連携で改善できる点はありますか？","会議や情報共有で減らせる無駄は何ですか？","助けてもらってありがたかったことはありますか？","伝えにくい意見があれば聞かせてもらえますか？"],
+ condition:["最近の仕事の負担感はどうですか？","集中しやすい時間や働き方はありますか？","私に変えてほしい関わり方はありますか？","安心して相談できる状態になっていますか？"]
+};
+const topicNames={progress:"進捗・成果",blockers:"課題・支援",growth:"成長・キャリア",teamwork:"連携・改善",condition:"働きやすさ"};
+function load(){try{return JSON.parse(localStorage.getItem(STORE))||{};}catch(_){return {};}}
+const state=Object.assign({answers:{},swot:{},tasks:[],oneNotes:"",topic:"progress",promptIndex:0,meeting:{name:"",date:"",goal:"",duration:30,participants:"",rows:[{name:"目的・ゴールの確認",mins:5},{name:"議題の検討",mins:20},{name:"決定事項と次の行動",mins:5}]}},load());
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(_){}}
+function toast(message){const el=$("toast");el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,3000);}
+async function copy(text){try{if(!navigator.clipboard||!navigator.clipboard.writeText)throw Error("no clipboard");await navigator.clipboard.writeText(text);toast("クリップボードにコピーしました");}catch(_){const area=document.createElement("textarea");area.value=text;area.style.position="fixed";area.style.opacity="0";document.body.append(area);area.select();let ok=false;try{ok=document.execCommand("copy");}catch(_){}area.remove();toast(ok?"コピーしました":"コピーできませんでした。ブラウザーの権限をご確認ください");}}
+function show(id){document.querySelectorAll("[data-panel]").forEach(el=>el.hidden=el.dataset.panel!==id);document.querySelectorAll("[data-open]").forEach(el=>{if(el.classList.contains("nav-link")){if(el.dataset.open===id)el.setAttribute("aria-current","page");else el.removeAttribute("aria-current");}});if(location.hash!=="#"+id)history.replaceState(null,"","#"+id);window.scrollTo({top:0,behavior:"smooth"});}
+function resetConfirm(message){return window.confirm(message);}
+function renderDisc(){const target=$("disc-questions");target.replaceChildren();questions.forEach((item,i)=>{const line=document.createElement("div");line.className="question";line.id="disc-q-"+i;const left=document.createElement("div");const text=document.createElement("p");text.textContent=(i+1)+". "+item[0];left.append(text);const scale=document.createElement("div");scale.className="scale";scale.setAttribute("role","group");scale.setAttribute("aria-label",item[0]+"：当てはまり度");for(let score=1;score<=5;score++){const b=document.createElement("button");b.type="button";b.className="score"+(state.answers[i]===score?" selected":"");b.dataset.score=String(score);b.dataset.question=String(i);b.textContent=String(score);b.setAttribute("aria-pressed",String(state.answers[i]===score));b.setAttribute("aria-label",score+"点");scale.append(b);}line.append(left,scale);target.append(line);});updateProgress();}
+function updateProgress(){const answered=questions.filter((_,i)=>Number.isInteger(state.answers[i])&&state.answers[i]>=1&&state.answers[i]<=5).length;$("disc-progress-label").textContent=answered+" / "+questions.length+" 問";$("disc-progress").style.width=(answered/questions.length*100)+"%";$("disc-calculate").disabled=answered!==questions.length;}
+function calculateDisc(){if(Object.keys(state.answers).filter(k=>state.answers[k]>=1&&state.answers[k]<=5).length<questions.length){toast("全16問に回答してください");return;}const scores={D:0,I:0,S:0,C:0};questions.forEach((q,i)=>scores[q[1]]+=Number(state.answers[i]));const order=Object.keys(scores).sort((a,b)=>scores[b]-scores[a]);const top=order[0];const second=order[1];$("disc-result").hidden=false;const summary=$("disc-summary");summary.replaceChildren();const flag=document.createElement("span");flag.className="tag";flag.textContent="簡易診断の結果";const h=document.createElement("h3");h.textContent=dimensions[top].lead;const lead=document.createElement("p");lead.textContent="上位傾向は「"+dimensions[top].name+"」"+(scores[top]===scores[second]?"（同点のタイプがあります）":"、次点は「"+dimensions[second].name+"」")+"。"+dimensions[top].strength;const tip=document.createElement("p");tip.style.marginTop="10px";tip.textContent="活かし方： "+dimensions[top].tip;summary.append(flag,h,lead,tip);
+const bars=$("disc-bars");bars.replaceChildren();Object.keys(dimensions).forEach(key=>{const row=document.createElement("div");row.className="disc-row";const label=document.createElement("span");label.textContent=dimensions[key].name;const track=document.createElement("div");track.className="bar-track";const fill=document.createElement("i");fill.style.width=((scores[key]-4)/16*100)+"%";fill.style.background=dimensions[key].color;track.append(fill);const score=document.createElement("span");score.textContent=scores[key]+"/20";row.append(label,track,score);bars.append(row);});$("disc-score-note").textContent="各傾向4問×1〜5点（4〜20点）。棒は各項目の相対的な高さを示します。";$("disc-result").scrollIntoView({behavior:"smooth",block:"start"});}
+function discText(){const scores={D:0,I:0,S:0,C:0};questions.forEach((q,i)=>scores[q[1]]+=Number(state.answers[i]||0));const sorted=Object.keys(scores).sort((a,b)=>scores[b]-scores[a]);return "DISC簡易診断（非公式・自己理解用）\n上位："+dimensions[sorted[0]].name+"\n"+Object.keys(scores).map(k=>dimensions[k].name+"："+scores[k]+"/20").join("\n")+"\n"+dimensions[sorted[0]].tip;}
+function initSwot(){["S","W","O","T"].forEach(k=>{$("swot-"+k).value=state.swot[k]||"";});}
+function swotText(){return "SWOT分析\n"+[["S","強み Strengths"],["W","弱み Weaknesses"],["O","機会 Opportunities"],["T","脅威 Threats"]].map(([key,label])=>"【"+label+"】\n"+($("swot-"+key).value.trim()||"（未入力）")).join("\n\n");}
+const quadrants=[{id:"do",name:"① すぐ着手",text:"重要・緊急｜自分で優先して対応"},{id:"plan",name:"② 計画する",text:"重要・非緊急｜時間を確保して進める"},{id:"delegate",name:"③ 委譲・調整",text:"非重要・緊急｜仕組み化や依頼を検討"},{id:"drop",name:"④ 整理・削減",text:"非重要・非緊急｜やめることも検討"}];
+function getQuadrant(task){return task.importance>=4?(task.urgency>=4?"do":"plan"):(task.urgency>=4?"delegate":"drop");}
+function renderTasks(){quadrants.forEach(q=>{$("items-"+q.id).replaceChildren();});state.tasks.forEach(task=>{const container=$("items-"+getQuadrant(task));const item=document.createElement("div");item.className="qitem"+(task.done?" completed":"");const info=document.createElement("div");const title=document.createElement("strong");title.textContent=task.title;const detail=document.createElement("small");detail.textContent="重要度 "+task.importance+" / 緊急度 "+task.urgency;info.append(title,detail);const buttons=document.createElement("div");buttons.className="btnbar";const complete=document.createElement("button");complete.type="button";complete.className="btn small";complete.textContent=task.done?"戻す":"完了";complete.dataset.taskDone=String(task.id);const remove=document.createElement("button");remove.type="button";remove.className="btn small danger";remove.textContent="削除";remove.dataset.taskDelete=String(task.id);buttons.append(complete,remove);item.append(info,buttons);container.append(item);});$("task-count").textContent="未完了 "+state.tasks.filter(t=>!t.done).length+" 件／全 "+state.tasks.length+" 件";}
+function tasksText(){return "優先順位マトリクス\n"+quadrants.map(q=>"【"+q.name+"】\n"+(state.tasks.filter(t=>getQuadrant(t)===q.id).map(t+(0) => t).length ? "" : "")).join("\n");}
+function taskExport(){return "優先順位マトリクス\n"+quadrants.map(q=>"【"+q.name+"】\n"+(state.tasks.filter(t=>getQuadrant(t)===q.id).map(t=>(t.done?"[完了] ":"[ ] ")+t.title+"（重要"+t.importance+"・緊急"+t.urgency+"）").join("\n")||"（なし）")).join("\n\n");}
+function updateTopicButtons(){document.querySelectorAll("[data-topic]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.topic===state.topic)));}
+function showPrompt(random){const choices=prompts[state.topic];if(random){let next=Math.floor(Math.random()*choices.length);if(choices.length>1&&next===state.promptIndex)next=(next+1)%choices.length;state.promptIndex=next;}if(state.promptIndex>=choices.length)state.promptIndex=0;$("prompt-category").textContent=topicNames[state.topic];$("prompt-text").textContent=choices[state.promptIndex];updateTopicButtons();save();}
+function initOne(){const textarea=$("one-notes");textarea.value=state.oneNotes||"";if(!prompts[state.topic])state.topic="progress";showPrompt(false);}
+function initMeeting(){const m=state.meeting;if(!m||!Array.isArray(m.rows)){state.meeting={name:"",date:"",goal:"",duration:30,participants:"",rows:[]};}const f=state.meeting;["name","date","goal","duration","participants"].forEach(k=>{if($("meeting-"+k))$("meeting-"+k).value=f[k]===undefined?"":f[k];});if(!f.date){const d=new Date();$("meeting-date").value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");f.date=$("meeting-date").value;}renderAgenda();}
+function agendaTotal(){return state.meeting.rows.reduce((sum,r)=>sum+(Math.max(0,Number(r.mins)||0)),0);}
+function updateAgendaStatus(){const total=agendaTotal();const duration=Number(state.meeting.duration)||0;const el=$("agenda-status");el.textContent="配分 "+total+"分 / 会議 "+duration+"分"+(total>duration?"（"+(total-duration)+"分オーバー）":total<duration?"（残り "+(duration-total)+"分）":"（ちょうど）");el.className="agenda-status "+(total>duration?"over":"ok");}
+function renderAgenda(){const wrap=$("agenda-rows");wrap.replaceChildren();state.meeting.rows.forEach((r,i)=>{const row=document.createElement("div");row.className="agenda-row";const input=document.createElement("input");input.type="text";input.value=r.name;input.placeholder="議題";input.maxLength=120;input.dataset.agendaName=String(i);input.setAttribute("aria-label","議題 "+(i+1));const mins=document.createElement("input");mins.type="number";mins.min="0";mins.max="999";mins.value=r.mins;mins.dataset.agendaMins=String(i);mins.setAttribute("aria-label","議題 "+(i+1)+" の分数");const btn=document.createElement("button");btn.type="button";btn.className="btn small danger";btn.textContent="削除";btn.dataset.agendaDelete=String(i);row.append(input,mins,btn);wrap.append(row);});updateAgendaStatus();}
+function agendaText(){const m=state.meeting;return "会議アジェンダ\n会議名："+(m.name||"未設定")+"\n日付："+(m.date||"未設定")+"\n参加者："+(m.participants||"未設定")+"\n会議時間："+m.duration+"分\n目的・決めたいこと："+(m.goal||"未設定")+"\n\n"+m.rows.map((r,i)=>(i+1)+". "+(r.name||"議題未入力")+"（"+(Number(r.mins)||0)+"分）").join("\n")+"\n\n合計配分："+agendaTotal()+"分\n決定事項：\n担当者・期限：";}
+document.addEventListener("click",e=>{
+ const open=e.target.closest("[data-open]");if(open){show(open.dataset.open);return;}
+ const score=e.target.closest("[data-score]");if(score){const i=Number(score.dataset.question);state.answers[i]=Number(score.dataset.score);save();$("disc-result").hidden=true;renderDisc();return;}
+ const topic=e.target.closest("[data-topic]");if(topic){state.topic=topic.dataset.topic;state.promptIndex=0;showPrompt(false);return;}
+ const done=e.target.closest("[data-task-done]");if(done){const t=state.tasks.find(x=>String(x.id)===done.dataset.taskDone);if(t)t.done=!t.done;save();renderTasks();return;}
+ const del=e.target.closest("[data-task-delete]");if(del){state.tasks=state.tasks.filter(x=>String(x.id)!==del.dataset.taskDelete);save();renderTasks();return;}
+ const delAgenda=e.target.closest("[data-agenda-delete]");if(delAgenda){state.meeting.rows.splice(Number(delAgenda.dataset.agendaDelete),1);save();renderAgenda();return;}
+});
+$("disc-calculate").addEventListener("click",calculateDisc);
+$("disc-copy").addEventListener("click",()=>copy(discText()));
+$("disc-reset").addEventListener("click",()=>{if(!resetConfirm("DISCの回答を初期化しますか？"))return;state.answers={};save();$("disc-result").hidden=true;renderDisc();});
+["S","W","O","T"].forEach(k=>{$("swot-"+k).addEventListener("input",e=>{state.swot[k]=e.target.value;save();});});
+$("swot-copy").addEventListener("click",()=>copy(swotText()));
+$("swot-reset").addEventListener("click",()=>{if(!resetConfirm("SWOTの入力内容を削除しますか？"))return;state.swot={};save();initSwot();toast("SWOTを初期化しました");});
+$("task-form").addEventListener("submit",e=>{e.preventDefault();const title=$("task-title").value.trim();if(!title)return;state.tasks.push({id:Date.now()+"-"+Math.random().toString(36).slice(2),title:title.slice(0,120),importance:Number($("task-importance").value),urgency:Number($("task-urgency").value),done:false});$("task-title").value="";save();renderTasks();toast("仕事を追加しました");$("task-title").focus();});
+$("task-copy").addEventListener("click",()=>copy(taskExport()));
+$("task-clear").addEventListener("click",()=>{if(!resetConfirm("登録した仕事をすべて削除しますか？"))return;state.tasks=[];save();renderTasks();});
+$("prompt-next").addEventListener("click",()=>showPrompt(true));
+$("prompt-copy").addEventListener("click",()=>copy("1on1の質問（"+topicNames[state.topic]+"）\n"+prompts[state.topic][state.promptIndex]+"\n\nメモ：\n"+(state.oneNotes||"")));
+$("one-notes").addEventListener("input",e=>{state.oneNotes=e.target.value;save();});
+$("one-clear").addEventListener("click",()=>{if(!resetConfirm("1on1メモを削除しますか？"))return;state.oneNotes="";$("one-notes").value="";save();});
+["name","date","goal","duration","participants"].forEach(k=>{$("meeting-"+k).addEventListener("input",e=>{state.meeting[k]=k==="duration"?Math.max(0,Number(e.target.value)||0):e.target.value;save();if(k==="duration")updateAgendaStatus();});});
+$("agenda-rows").addEventListener("input",e=>{const i=e.target.dataset.agendaName!==undefined?Number(e.target.dataset.agendaName):Number(e.target.dataset.agendaMins);const row=state.meeting.rows[i];if(!row)return;if(e.target.dataset.agendaName!==undefined)row.name=e.target.value;else row.mins=Math.max(0,Number(e.target.value)||0);save();updateAgendaStatus();});
+$("agenda-add").addEventListener("click",()=>{state.meeting.rows.push({name:"",mins:5});save();renderAgenda();const inputs=$("agenda-rows").querySelectorAll("input[data-agenda-name]");if(inputs.length)inputs[inputs.length-1].focus();});
+$("agenda-copy").addEventListener("click",()=>copy(agendaText()));
+$("agenda-reset").addEventListener("click",()=>{if(!resetConfirm("会議アジェンダを初期化しますか？"))return;state.meeting={name:"",date:"",goal:"",duration:30,participants:"",rows:[]};initMeeting();save();});
+renderDisc();initSwot();renderTasks();initOne();initMeeting();const initial=location.hash.replace("#","");show(["home","disc","swot","priority","oneonone","agenda"].includes(initial)?initial:"home");
+})();
