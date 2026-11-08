@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#182944">
+<meta name="description" content="DISC簡易診断、SWOT分析、優先順位マトリクス、1on1質問、会議アジェンダを無料で使えるビジネスツール集。ログイン不要でスマホにも対応。">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Business Toolkit｜仕事を前に進める5つのツール</title>
+<link rel="stylesheet" href="./business.css?v=1.0.0">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header><div class="shell head">
+<a class="logo" href="#home" data-open="home"><span class="logo-icon" aria-hidden="true">B</span><span>Business Toolkit</span></a>
+<span class="header-note">仕事の整理・チームづくりを、もっと手軽に。</span>
+</div></header>
+<div class="hero"><div class="shell">
+<div class="eyebrow">FREE BUSINESS TOOLS</div>
+<h1>考える時間を減らして、<br>動く時間を増やす。</h1>
+<p>自己理解から仕事の整理、メンバーとの対話まで。仕事でそのまま使える5つのシンプルなツールをまとめました。</p>
+<div class="meta"><span>✓ 登録・ログイン不要</span><span>✓ スマホ対応</span><span>✓ 入力は端末内に保存</span></div>
+</div></div>
+<div class="nav-wrap"><nav class="shell nav" aria-label="ツールナビゲーション">
+<button type="button" class="nav-link" data-open="home" aria-current="page">ホーム</button>
+<button type="button" class="nav-link" data-open="disc">DISC診断</button>
+<button type="button" class="nav-link" data-open="swot">SWOT分析</button>
+<button type="button" class="nav-link" data-open="priority">優先順位</button>
+<button type="button" class="nav-link" data-open="oneonone">1on1</button>
+<button type="button" class="nav-link" data-open="agenda">会議アジェンダ</button>
+</nav></div>
+<main class="shell" id="main">
+<section data-panel="home">
+<div class="section-heading"><h2>目的に合わせて選ぶ</h2><p>すべてブラウザー上で動作します。入力内容はサーバーへ送信しません。</p></div>
+<div class="cards">
+<button type="button" class="tool-card" data-open="disc"><span class="emoji" aria-hidden="true">🧭</span><strong>DISC簡易診断</strong><span>16問で「推進・交流・協調・分析」の行動傾向を見える化。</span></button>
+<button type="button" class="tool-card" data-open="swot"><span class="emoji" aria-hidden="true">🎯</span><strong>SWOT分析</strong><span>強み・弱み・機会・脅威の4象限で、戦略の材料を整理。</span></button>
+<button type="button" class="tool-card" data-open="priority"><span class="emoji" aria-hidden="true">📌</span><strong>優先順位マトリクス</strong><span>重要度と緊急度で仕事を自動分類。やるべきことを明確に。</span></button>
+<button type="button" class="tool-card" data-open="oneonone"><span class="emoji" aria-hidden="true">🤝</span><strong>1on1質問メーカー</strong><span>部下やメンバーとの会話を深める質問をテーマ別に提案。</span></button>
+<button type="button" class="tool-card" data-open="agenda"><span class="emoji" aria-hidden="true">🗓️</span><strong>会議アジェンダ</strong><span>目的・議題・時間配分を整理して、コピーしてすぐに共有。</span></button>
+</div>
+<div class="note" style="margin-top:22px"><strong>プライバシーについて：</strong>データはこのブラウザーのローカルストレージに保存されます。ブラウザーデータ削除や別端末への移動では引き継がれません。機密情報の入力は組織のルールに従ってください。</div>
+</section>
+<section data-panel="disc" hidden>
+<div class="section-heading"><h2>🧭 DISC簡易診断</h2><p>16個の設問に「自分にどの程度当てはまるか」を1〜5で回答してください。所要時間は約3分。</p></div>
+<div class="note"><strong>診断の位置づけ：</strong>DISCの4分類を参考にした独自の非公式チェックです。正式な心理検査・適性評価ではなく、採用・人事評価・人物の決めつけには使わないでください。</div>
+<div class="panel" style="margin-top:16px">
+<div class="fields-row" style="justify-content:space-between"><strong>回答の進捗</strong><span class="count" id="disc-progress-label">0 / 16 問</span></div>
+<div class="progress" role="progressbar" aria-label="回答進捗"><i id="disc-progress"></i></div>
+<div class="scale-head"><span>1 = まったく当てはまらない</span><span>5 = とても当てはまる</span></div>
+<div id="disc-questions"></div>
+<div class="btnbar"><button class="btn primary" id="disc-calculate" disabled>診断結果を見る</button><button class="btn danger" id="disc-reset">回答をリセット</button></div>
+</div>
+<div class="panel" id="disc-result" hidden>
+<div id="disc-summary" class="disc-summary"></div>
+<h3>4タイプのスコア</h3><div class="disc-bars" id="disc-bars"></div>
+<p class="hint" id="disc-score-note"></p>
+<div class="btnbar"><button class="btn accent" id="disc-copy">結果をコピー</button></div>
+</div>
+</section>
+<section data-panel="swot" hidden>
+<div class="section-heading"><h2>🎯 SWOT分析</h2><p>自分、チーム、事業、プロジェクトなどを4つの視点で整理するツールです。</p></div>
+<div class="panel">
+<div class="field-grid">
+<div class="swot" data-q="S"><div class="swot-label"><strong>S｜Strengths（強み）</strong><span class="tag">内部・プラス</span></div><label class="field" for="swot-S">強み・得意なこと<textarea id="swot-S" placeholder="例：専門知識が豊富&#10;顧客との関係が強い"></textarea></label></div>
+<div class="swot" data-q="W"><div class="swot-label"><strong>W｜Weaknesses（弱み）</strong><span class="tag">内部・マイナス</span></div><label class="field" for="swot-W">不足していること・課題<textarea id="swot-W" placeholder="例：属人化している業務が多い&#10;引き継ぎに時間がかかる"></textarea></label></div>
+<div class="swot" data-q="O"><div class="swot-label"><strong>O｜Opportunities（機会）</strong><span class="tag">外部・プラス</span></div><label class="field" for="swot-O">追い風・チャンス<textarea id="swot-O" placeholder="例：新規市場からの問い合わせ&#10;自動化技術の普及"></textarea></label></div>
+<div class="swot" data-q="T"><div class="swot-label"><strong>T｜Threats（脅威）</strong><span class="tag">外部・マイナス</span></div><label class="field" for="swot-T">リスク・外部の変化<textarea id="swot-T" placeholder="例：競合の価格引き下げ&#10;重要部品の供給リスク"></textarea></label></div>
+</div>
+<div class="btnbar"><button class="btn primary" id="swot-copy">分析内容をコピー</button><button class="btn danger" id="swot-reset">入力をクリア</button></div>
+<p class="hint">ヒント：強み×機会で「伸ばす施策」、弱み×脅威で「備える施策」を考えると行動につながります。</p>
+</div>
+</section>
+<section data-panel="priority" hidden>
+<div class="section-heading"><h2>📌 優先順位マトリクス</h2><p>仕事の重要度・緊急度を1〜5で設定すると、4象限へ自動で振り分けます。4〜5を「高」と判定します。</p></div>
+<div class="panel">
+<form id="task-form" class="fields-row">
+<label class="field field-wide" for="task-title">仕事の内容<input id="task-title" placeholder="例：設計レビュー資料をまとめる" maxlength="120" required></label>
+<label class="field field-short" for="task-importance">重要度<select id="task-importance"><option value="5">5｜非常に高い</option><option value="4">4｜高い</option><option value="3" selected>3｜普通</option><option value="2">2｜低い</option><option value="1">1｜非常に低い</option></select></label>
+<label class="field field-short" for="task-urgency">緊急度<select id="task-urgency"><option value="5">5｜今すぐ</option><option value="4">4｜急ぎ</option><option value="3" selected>3｜普通</option><option value="2">2｜余裕あり</option><option value="1">1｜急がない</option></select></label>
+<button type="submit" class="btn primary">追加する</button>
+</form>
+<div class="divider"></div>
+<p class="count" id="task-count">0 件</p>
+<div class="matrix">
+<div class="quadrant"><h3>① すぐ着手</h3><p>重要・緊急｜優先して取り組む</p><div id="items-do"></div></div>
+<div class="quadrant"><h3>② 計画する</h3><p>重要・非緊急｜時間を確保する</p><div id="items-plan"></div></div>
+<div class="quadrant"><h3>③ 委譲・調整</h3><p>非重要・緊急｜人や仕組みを活用</p><div id="items-delegate"></div></div>
+<div class="quadrant"><h3>④ 整理・削減</h3><p>非重要・非緊急｜削減を検討</p><div id="items-drop"></div></div>
+</div>
+<div class="btnbar"><button class="btn accent" id="task-copy">一覧をコピー</button><button class="btn danger" id="task-clear">すべて削除</button></div>
+</div>
+</section>
+<section data-panel="oneonone" hidden>
+<div class="section-heading"><h2>🤝 1on1質問メーカー</h2><p>相手が話しやすい問いを選び、面談メモを残せます。質問は話のきっかけとして使ってください。</p></div>
+<div class="panel">
+<h3>質問のテーマ</h3>
+<div class="topic-filter">
+<button type="button" class="btn" data-topic="progress" aria-pressed="true">進捗・成果</button>
+<button type="button" class="btn" data-topic="blockers" aria-pressed="false">課題・支援</button>
+<button type="button" class="btn" data-topic="growth" aria-pressed="false">成長・キャリア</button>
+<button type="button" class="btn" data-topic="teamwork" aria-pressed="false">連携・改善</button>
+<button type="button" class="btn" data-topic="condition" aria-pressed="false">働きやすさ</button>
+</div>
+<div class="prompt-card" role="status" aria-live="polite"><div class="eyebrow-small" id="prompt-category">進捗・成果</div><p id="prompt-text"></p></div>
+<div class="btnbar"><button class="btn primary" id="prompt-next">別の質問を表示</button><button class="btn accent" id="prompt-copy">質問とメモをコピー</button></div>
+<div class="divider"></div>
+<label class="field" for="one-notes">面談メモ<textarea id="one-notes" placeholder="気づき・合意事項・次回の確認事項など"></textarea><small>メモはこの端末内にのみ保存されます。</small></label>
+<div class="btnbar"><button class="btn danger" id="one-clear">メモを削除</button></div>
+</div>
+</section>
+<section data-panel="agenda" hidden>
+<div class="section-heading"><h2>🗓️ 会議アジェンダ</h2><p>議題と持ち時間を決めて、脱線しにくい会議を準備します。</p></div>
+<div class="panel">
+<div class="field-grid">
+<label class="field" for="meeting-name">会議名<input id="meeting-name" maxlength="120" placeholder="例：週次設計レビュー"></label>
+<label class="field" for="meeting-date">開催日<input id="meeting-date" type="date"></label>
+<label class="field" for="meeting-duration">会議時間（分）<input id="meeting-duration" type="number" min="0" max="1440" value="30"></label>
+<label class="field" for="meeting-participants">参加者（任意）<input id="meeting-participants" maxlength="160" placeholder="例：チームメンバー"></label>
+</div>
+<div style="margin-top:18px"><label class="field" for="meeting-goal">この会議で決めたいこと<input id="meeting-goal" maxlength="250" placeholder="例：今週のリスクと担当者・対策期限を確定する"></label></div>
+<div class="divider"></div><h3>議題と時間配分</h3><div id="agenda-rows"></div>
+<div class="btnbar"><button type="button" class="btn" id="agenda-add">＋ 議題を追加</button><span id="agenda-status" class="agenda-status"></span></div>
+<div class="btnbar"><button type="button" class="btn primary" id="agenda-copy">アジェンダをコピー</button><button type="button" class="btn danger" id="agenda-reset">初期化する</button></div>
+<p class="hint">共有用テキストの末尾に「決定事項」と「担当者・期限」の記入欄も付けています。</p>
+</div>
+</section>
+</main>
+<footer class="footer">Business Toolkit · 登録不要 / ブラウザー内保存 / 無料
+<p>以前の都道府県ドラフトゲームは <a class="link" href="./draft.html">こちらから開けます</a>。</p></footer>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<noscript>このツールの利用にはJavaScriptが必要です。</noscript>
+<script src="./business.js?v=1.0.0" defer></script>
+</body></html>
