@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202f58">
+<title>WorkStyle Lab｜DISC式 行動スタイル・チームコミュニケーション</title>
+<meta name="description" content="仕事でのコミュニケーション傾向を4つの軸から考える独自の簡易チェック。公式DiSC検査ではありません。">
+<style>
+:root{--ink:#1b2a42;--blue:#324aa2;--bg:#f5f7fd;--line:#e0e6f0;--muted:#68758a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:var(--ink);line-height:1.7}button,input{font:inherit}
+.wrap{max-width:950px;margin:auto;width:calc(100% - 32px)}header{background:#fff;border-bottom:1px solid var(--line)}.nav{height:68px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:950;font-size:21px;text-decoration:none;color:var(--ink)}.logo span{color:var(--blue)}.nav small{color:var(--muted);font-size:12px}
+.hero{background:linear-gradient(115deg,#1d3065,#405ec1);border-radius:24px;color:white;padding:42px 45px;margin:26px auto 25px;box-shadow:0 15px 30px #1d34791b}.eyebrow{color:#cbd8ff;letter-spacing:2px;font-weight:900;font-size:11px}.hero h1{font-size:clamp(27px,4vw,42px);line-height:1.3;margin:8px 0 12px}.hero p{max-width:670px;font-size:14px;color:#e3eaff;margin:0}.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.tile{background:white;border:1px solid var(--line);border-radius:15px;padding:15px}.letter{font-size:23px;font-weight:950}.tile h3{font-size:15px;margin:4px 0}.tile p{font-size:12px;color:var(--muted);margin:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:21px;padding:30px;margin:24px 0;box-shadow:0 12px 30px #203c7010}.panel h2{font-size:22px;margin:0 0 8px}.lead{font-size:13px;color:var(--muted);margin:0 0 22px}.questions{display:grid;grid-template-columns:1fr;gap:16px}.question{border-bottom:1px solid var(--line);padding:0 0 17px}.question:last-child{border-bottom:0}.question p{font-size:14px;font-weight:800;margin:0 0 10px}.answers{display:flex;flex-wrap:wrap;gap:7px}.answer{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:100px;padding:7px 11px;font-size:12px;color:#506079;cursor:pointer}.answer:has(input:checked){border-color:#4664b8;background:#eaf0ff;color:#243d8b;font-weight:900}.answer input{accent-color:#3b56aa}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:21px}.primary{background:var(--blue);border:0;color:white;padding:12px 25px;border-radius:11px;font-weight:900}.secondary{background:#f0f3fa;border:0;padding:12px 21px;border-radius:11px;color:#44567b;font-weight:900}.error{font-size:13px;color:#b13838;margin:12px 0 0}
+.result{display:none}.result.visible{display:block}.bars{display:grid;gap:13px;margin:20px 0}.bar-row{display:grid;grid-template-columns:115px 1fr 40px;gap:12px;align-items:center;font-size:13px;font-weight:800}.track{background:#e9edf6;height:12px;border-radius:30px;overflow:hidden}.fill{height:100%;border-radius:30px;background:#4263bf;width:0;transition:width .3s}.result-head{padding:19px;border-radius:15px;background:#eef3ff}.result-head strong{font-size:23px}.result-head p{font-size:13px;margin:5px 0 0}.tips{font-size:14px;color:#4a5f7c}.foot{font-size:12px;color:var(--muted);margin:15px 0 35px}
+@media(max-width:650px){.hero{padding:32px 25px}.tiles{grid-template-columns:repeat(2,1fr)}.panel{padding:21px}.bar-row{grid-template-columns:85px 1fr 33px;gap:8px;font-size:12px}.answers{gap:6px}.answer{padding:7px 9px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="#">Work<span>Style</span> Lab</a><small>BUSINESS &amp; TEAMWORK</small></div></header>
+<main class="wrap">
+<section class="hero"><p class="eyebrow">WORK STYLE / COMMUNICATION</p><h1>チームを知る。<br>自分の働き方を知る。</h1><p>DISCの4つの行動スタイルを参考に、仕事の場面での自分の傾向を振り返る独自の簡易テスト。会議・相談・役割分担のヒントに。</p></section>
+<div class="tiles">
+<div class="tile"><span class="letter" style="color:#c94459">D</span><h3>主導・決断</h3><p>結論を出し、前へ進める</p></div>
+<div class="tile"><span class="letter" style="color:#cf8e13">I</span><h3>影響・交流</h3><p>人を巻き込み、場を明るくする</p></div>
+<div class="tile"><span class="letter" style="color:#2b9a81">S</span><h3>安定・支援</h3><p>協力関係と着実さを大事にする</p></div>
+<div class="tile"><span class="letter" style="color:#4663b7">C</span><h3>慎重・品質</h3><p>正確さと根拠を大事にする</p></div>
+</div>
+<section class="panel" id="test"><h2>仕事の行動スタイル簡易チェック</h2><p class="lead">各文について、普段の仕事でどのくらい当てはまるか選んでください（全16問・所要3〜5分）。回答はこの端末上で処理され、送信・保存されません。</p>
+<form id="quiz"><div id="questions" class="questions"></div><div class="actions"><button type="submit" class="primary">結果を見る</button><button type="reset" class="secondary">回答をリセット</button></div><p class="error" id="error" aria-live="polite"></p></form></section>
+<section id="result" class="panel result" aria-live="polite"><h2>あなたの行動スタイル（参考）</h2><div id="result-head" class="result-head"></div><div id="bars" class="bars"></div><p class="tips" id="tips"></p><button class="secondary" id="again" type="button">もう一度チェックする</button></section>
+<p class="foot">このページはDISCの一般的な4軸をヒントにした独自の自己理解ツールであり、Everything DiSC®などの認定検査・公式商品ではありません。心理測定的な妥当性検証は実施しておらず、採用・評価・昇進や医療的判断には使わないでください。4つの傾向は誰にも程度の差があり、優劣や固定的な人格を意味しません。</p>
+</main>
+<script>
+"use strict";
+const questions=[
+["D","議論が長引くと、決断して次の行動を決めたい。"],
+["I","初対面の人と話すと、新しいアイデアが湧いてくる。"],
+["S","チームの誰かが困っていたら、自然に手助けする。"],
+["C","提案する前に、データや前提条件を確認したい。"],
+["D","難しい課題では、自分からリーダー役を引き受ける。"],
+["I","自分の考えを熱意をもって伝えるのが得意だ。"],
+["S","急な変更より、予定を共有して進める方が安心する。"],
+["C","細かいミスを防ぐための仕組みを考えるのが好きだ。"],
+["D","対立があっても、必要な意見ははっきり伝える。"],
+["I","メンバーの良いところを言葉にして伝えることが多い。"],
+["S","相手の話を最後まで聞き、合意を大切にしている。"],
+["C","完成度を上げるために、根拠や手順を見直すことが多い。"],
+["D","高い目標に向けて、スピード感をもって動きたい。"],
+["I","人をつなぎ、協力を生み出すことに楽しさを感じる。"],
+["S","仲間のペースを尊重して、継続的に支えるのが得意だ。"],
+["C","結論だけでなく、その結論に至る理由が気になる。"]
+];
+const defs={
+D:{name:"主導・決断",intro:"物事を前へ進め、判断する場面で力を出しやすい傾向があります。",tip:"周囲には目的・優先順位を明確に伝えつつ、結論を急ぐ前に他の視点を聞くと効果的です。"},
+I:{name:"影響・交流",intro:"アイデアを広げ、周囲と関係を築く場面で力を出しやすい傾向があります。",tip:"意見交換や巻き込みの強みを生かしながら、実行担当と期限を明確にすると成果につながります。"},
+S:{name:"安定・支援",intro:"協力関係を育て、物事を丁寧に進める場面で力を出しやすい傾向があります。",tip:"相談しやすい雰囲気をつくりつつ、自分の希望や負荷も早めに伝えると役立ちます。"},
+C:{name:"慎重・品質",intro:"情報を整理し、品質や正確さを高める場面で力を出しやすい傾向があります。",tip:"分析の強みを生かしつつ、判断に必要な精度と期限を決めると進行がスムーズです。"}
+};
+const holder=document.getElementById("questions");
+questions.forEach(([type,label],i)=>{
+const el=document.createElement("div");el.className="question";
+const p=document.createElement("p");p.textContent=(i+1)+". "+label;el.append(p);
+const opts=document.createElement("div");opts.className="answers";
+["まったく違う","あまり違う","どちらでもない","やや当てはまる","よく当てはまる"].forEach((txt,n)=>{
+const lab=document.createElement("label");lab.className="answer";
+const input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=String(n+1);
+lab.append(input,document.createTextNode(txt));opts.append(lab)
+});el.append(opts);holder.append(el)
+});
+const form=document.getElementById("quiz"),res=document.getElementById("result"),err=document.getElementById("error");
+form.addEventListener("submit",e=>{
+e.preventDefault();const sums={D:0,I:0,S:0,C:0};
+for(let i=0;i<questions.length;i++){const input=form.querySelector('input[name="q'+i+'"]:checked');if(!input){err.textContent="全16問に回答してください（未回答："+(i+1)+"問目）。";form.querySelectorAll(".question")[i].scrollIntoView({behavior:"smooth",block:"center"});return}sums[questions[i][0]]+=Number(input.value)}
+err.textContent="";const order=Object.keys(sums).sort((a,b)=>sums[b]-sums[a]);const winner=order[0];const chosen=defs[winner];
+const head=document.getElementById("result-head");head.replaceChildren();const strong=document.createElement("strong");strong.textContent=winner+"｜"+chosen.name;const p=document.createElement("p");p.textContent=chosen.intro;head.append(strong,p);
+const bars=document.getElementById("bars");bars.replaceChildren();
+for(const k of ["D","I","S","C"]){const row=document.createElement("div");row.className="bar-row";const name=document.createElement("span");name.textContent=k+" "+defs[k].name.split("・")[0];const track=document.createElement("div");track.className="track";const fill=document.createElement("div");fill.className="fill";fill.style.width=(sums[k]/20*100)+"%";track.append(fill);const num=document.createElement("span");num.textContent=sums[k]+"/20";row.append(name,track,num);bars.append(row)}
+document.getElementById("tips").textContent="仕事での活かし方："+chosen.tip+" ほかの軸も組み合わせて、自分らしい働き方を考えてみましょう。";
+res.classList.add("visible");res.scrollIntoView({behavior:"smooth",block:"start"})
+});
+form.addEventListener("reset",()=>{res.classList.remove("visible");err.textContent=""});
+document.getElementById("again").addEventListener("click",()=>{form.reset();document.getElementById("test").scrollIntoView({behavior:"smooth",block:"start"})});
+</script>
+</body></html>
