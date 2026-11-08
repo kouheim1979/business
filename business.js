@@ -74,5 +74,5 @@ $("agenda-rows").addEventListener("input",e=>{const i=e.target.dataset.agendaNam
 $("agenda-add").addEventListener("click",()=>{state.meeting.rows.push({name:"",mins:5});save();renderAgenda();const inputs=$("agenda-rows").querySelectorAll("input[data-agenda-name]");if(inputs.length)inputs[inputs.length-1].focus();});
 $("agenda-copy").addEventListener("click",()=>copy(agendaText()));
 $("agenda-reset").addEventListener("click",()=>{if(!resetConfirm("会議アジェンダを初期化しますか？"))return;state.meeting={name:"",date:"",goal:"",duration:30,participants:"",rows:[]};initMeeting();save();});
-renderDisc();initSwot();renderTasks();initOne();initMeeting();const initial=location.hash.replace("#","");show(["home","disc","swot","priority","oneonone","agenda"].includes(initial)?initial:"home");
+renderDisc();initSwot();renderTasks();initOne();initMeeting();const initial=location.hash.replace("#","");show(["home","disc","swot","mece","priority","oneonone","agenda"].includes(initial)?initial:"home");
 })();
