@@ -100,7 +100,7 @@ const dateToday=()=>{const x=new Date();return [x.getFullYear(),String(x.getMont
 const monthToday=()=>dateToday().slice(0,7);
 const shift=(m,n)=>{const a=m.split('-').map(Number),d=new Date(a[0],a[1]-1+n,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');};
 const id=()=>crypto.randomUUID();
-const h=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&#39;'}[c]));
+const h=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const str=(v,max=500)=>String(v||'').trim().slice(0,max);
 const amount=v=>Math.max(0,Math.min(1e12,Number(v)||0));
 const safeUrl=v=>{try{const a=new URL(str(v));return ['https:','http:'].includes(a.protocol)?a.href:'';}catch{return '';}};
