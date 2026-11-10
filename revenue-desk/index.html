@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'">
+<meta name="theme-color" content="#111a31">
+<title>Revenue Desk | 収益化サイト管理</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#192541;background:#f5f7fb;--line:#e6ebf3;--dim:#8190a5;--violet:#5967df;--green:#16aa89;--shadow:0 9px 34px #1a315307}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #b9c2ff;outline-offset:2px}a{color:#5665d4;text-decoration:none}a:hover{text-decoration:underline}button:disabled{opacity:.5;cursor:default}[hidden]{display:none!important}
+.shell{display:flex;min-height:100vh}.sidebar{width:255px;flex:none;background:#111a30;color:#b6c4dd;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:29px 17px}.logo{display:flex;align-items:center;gap:12px;margin:0 9px 45px}.mark{width:43px;height:43px;border-radius:12px;background:linear-gradient(145deg,#7783fc,#4352c6);color:#fff;font-weight:900;font-size:24px;display:grid;place-items:center}.mark span{color:#93e6d5}.logo strong{font-size:16px;color:#fff;letter-spacing:-.4px}.logo small{display:block;color:#8f9fbb;font-size:10px;margin-top:3px}.menu-caption,.eyebrow{font-size:10px;letter-spacing:1.5px;font-weight:800}.menu-caption{color:#627799;padding-left:17px;margin-bottom:13px}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:#b2c1dc;text-align:left;border-radius:11px;padding:14px 16px;font-weight:700;font-size:13px}.nav button b{font-size:19px;font-weight:500;margin-right:15px}.nav button.active{background:#344365;color:#fff;box-shadow:inset 3px 0 #8b9afd}.nav button:hover{background:#263651}.sidebar-bottom{margin-top:auto;background:#17243d;border:1px solid #30415c;border-radius:12px;padding:15px;line-height:1.6}.sidebar-bottom strong{font-size:11px;color:#daefff;display:block}.sidebar-bottom small{font-size:10px;color:#91a3bd}.dot{color:#3bd8aa}
+.main{min-width:0;flex:1;display:flex;flex-direction:column}.top{height:77px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 38px;gap:15px}.crumb{font-size:11px;color:#97a3b6;letter-spacing:.7px}.crumb b{color:#45536d}.top-right{display:flex;align-items:center;gap:20px}.top-right small{color:#8798aa;font-size:11px}.mobile-logo{display:none}.content{width:100%;max-width:1540px;margin:0 auto;padding:39px;flex:1}.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px}.eyebrow{color:#6271dc;margin:0 0 10px}.page-head h1{font-size:29px;letter-spacing:-1px;margin:0 0 9px}.intro{font-size:13px;color:#8490a5;margin:0;line-height:1.7}.btn{border:1px solid transparent;background:#fff;border-radius:9px;min-height:41px;padding:10px 16px;font-weight:750;font-size:12px;white-space:nowrap}.btn.primary{background:var(--violet);color:#fff}.btn.primary:hover{background:#4756cc}.btn.secondary{border-color:#dfe6f0;color:#41526c}.btn.danger{background:#fff1f2;color:#be4c59;border-color:#ffdcdf}.btn.mini{font-size:11px;min-height:32px;padding:7px 10px}.link-btn{border:0;background:none;color:var(--violet);font-size:11px;font-weight:700;padding:7px}.actions{display:flex;gap:8px;flex-wrap:wrap}.panel,.metric,.tile{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.panel{padding:25px;margin-bottom:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:21px}.panel-head h2{margin:0;font-size:16px}.tiny-heading{font-size:10px;letter-spacing:1.5px;color:#a3afc2;font-weight:800;margin:0 0 7px}.muted{font-size:11px;color:#95a3b5}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-bottom:19px}.metric{padding:24px 22px;min-height:150px;position:relative;overflow:hidden}.metric label{display:block;color:#79889e;font-size:12px;font-weight:700;margin-bottom:19px}.metric strong{font-size:28px;letter-spacing:-1px;display:block;white-space:nowrap}.metric small{display:block;margin-top:14px;color:#93a0b4;font-size:11px}.bubble{position:absolute;right:18px;top:20px;width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#eff0ff;color:#6472db;font-size:19px}.bubble.green{background:#eaf9f4;color:#0db392}.bubble.orange{background:#fff4e5;color:#e7a44d}.dashboard-columns{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(290px,1fr);gap:18px}.dashboard-columns.bottom{grid-template-columns:1fr 1fr}.chart{display:flex;align-items:stretch;gap:13px;height:218px;border-bottom:1px solid #e9ecf4;padding-top:14px}.chart-group{flex:1;display:flex;flex-direction:column;justify-content:flex-end;min-width:0;align-items:center;gap:7px}.chart-bars{height:178px;display:flex;align-items:end;justify-content:center;gap:6px;width:100%;max-width:64px}.chart-bars span{width:36%;border-radius:5px 5px 0 0;min-height:0;background:#6876ee;transition:height .2s}.chart-bars span.cost{background:#b4bed4}.chart-group small{color:#8b98ae;font-size:10px}.legend{display:flex;align-items:center;justify-content:flex-end;gap:6px;font-size:11px;color:#8d9aad}.legend i{width:8px;height:8px;background:#6876ee;border-radius:2px;margin-left:11px}.legend i.cost{background:#b4bed4}.progress{height:9px;background:#edf0f6;border-radius:50px;overflow:hidden;margin-top:15px}.progress>div{height:100%;background:linear-gradient(90deg,#6573ee,#29c0ac);border-radius:50px}.big-number{font-size:24px;font-weight:800;margin:9px 0}.big-number small{font-size:12px;font-weight:500;color:#9ca9bc}.separator{border:0;border-top:1px solid var(--line);margin:24px 0}.plain-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #f0f2f7;padding:12px 0;font-size:12px}.plain-row:last-child{border-bottom:0}.plain-row strong{font-weight:800}.plain-row small{display:block;color:#98a5b9;margin-top:5px;font-size:10px}.plain-row .truncate{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:250px}.badge{display:inline-block;font-size:10px;font-weight:800;padding:5px 9px;border-radius:100px;color:#6675cf;background:#f0f1ff;white-space:nowrap}.badge.green{background:#e6f7f1;color:#0f987f}.badge.orange{background:#fff3e1;color:#ae762c}.badge.red{background:#ffedf0;color:#bc5664}.badge.gray{background:#eff2f6;color:#8290a1}.empty{text-align:center;color:#a5b0c2;font-size:12px;line-height:2;padding:32px 12px}.empty strong{display:block;color:#7e8ca3;font-size:13px}.empty .empty-icon{font-size:29px;display:block;margin-bottom:4px}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.toolbar input,.toolbar select,input.control,select.control,textarea.control{border:1px solid #e0e6ef;background:#fff;border-radius:9px;color:#24324d;min-height:41px;padding:10px 12px}.toolbar input.search{min-width:250px;flex:1;max-width:440px}.toolbar label{font-size:12px;color:#758399;display:flex;align-items:center;gap:8px}.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:16px}.tile{padding:21px}.tile-title{display:flex;gap:12px;align-items:center;margin-bottom:19px}.tile-icon{height:42px;width:42px;flex:none;background:#eff0fe;color:#6572dc;border-radius:12px;display:grid;place-items:center;font-size:20px;font-weight:800}.tile-title strong{font-size:15px;display:block;overflow-wrap:anywhere}.tile-title small{color:#99a5b8;font-size:10px;display:block;margin-top:5px}.tags{display:flex;gap:7px;flex-wrap:wrap}.tile-details{display:grid;grid-template-columns:1fr 1fr;margin:22px 0;gap:16px}.tile-details small{color:#9aa6b7;font-size:10px;display:block;margin-bottom:8px}.tile-details strong{font-size:17px}.tile-note{color:#9aa6b8;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:16px;min-height:15px}.tile-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:15px;margin-top:15px}.table-scroller{overflow-x:auto}.ledger{width:100%;border-collapse:collapse;white-space:nowrap}th,td{text-align:left;border-bottom:1px solid #edf0f6;padding:15px 12px;font-size:12px}th{color:#9aa6b8;font-size:10px;font-weight:800}td:last-child{text-align:right}td.num,th.num{text-align:right}.pos{color:#149a7d;font-weight:800}.neg{color:#d26d71;font-weight:800}.task-row{display:flex;align-items:center;gap:14px;border-bottom:1px solid #edf0f4;padding:17px 0}.task-row:last-child{border-bottom:0}.task-row input[type=checkbox]{width:18px;height:18px;accent-color:#5967df}.task-info{flex:1;min-width:0}.task-info strong{font-size:13px;display:block;overflow-wrap:anywhere}.task-info small{font-size:11px;display:block;color:#99a5b7;margin-top:7px}.task-row.done strong{text-decoration:line-through;color:#a2acbb}.summary-strips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:17px}.summary-strips>span{font-size:12px;color:#70809a;background:#fff;border:1px solid var(--line);padding:11px 15px;border-radius:10px}.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.settings-grid .panel{margin-bottom:0}.body-copy{font-size:12px;line-height:1.9;color:#8794a8}.file-label{position:relative;overflow:hidden;display:inline-flex;align-items:center}.file-label input{position:absolute;opacity:0;inset:0;cursor:pointer}.help{font-size:11px;color:#9ba6ba;line-height:1.8}.inline-controls{display:flex;gap:10px;flex-wrap:wrap}.footer{border-top:1px solid var(--line);font-size:10px;color:#a7b2c3;padding:18px 39px}.mobile-nav{display:none}
+dialog{border:1px solid #e1e8f2;border-radius:17px;box-shadow:0 20px 70px #121e3755;color:#22304c;width:min(520px,calc(100% - 30px));padding:25px}dialog::backdrop{background:#101a3080}.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:20px}.dialog-header h2{font-size:20px;margin:0}.xbtn{border:0;background:#f3f5fa;border-radius:8px;font-size:22px;height:33px;width:33px;color:#8592aa}.field{display:block;margin-bottom:16px}.field span{display:block;font-size:12px;color:#66758f;font-weight:750;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe6f0;border-radius:9px;padding:10px 12px;min-height:43px;color:#27344c;background:#fff}.field textarea{min-height:70px;resize:vertical}.field-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dialog-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:22px}.toast{position:fixed;right:18px;bottom:19px;z-index:100;background:#1b2945;color:#fff;border-radius:10px;padding:13px 17px;box-shadow:0 12px 44px #141d3640;opacity:0;transition:.2s;pointer-events:none;font-size:12px}.toast.show{opacity:1}.lock-screen{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#10192f,#24376d);display:flex;align-items:center;justify-content:center;padding:18px}.lock-card{width:min(435px,100%);background:#fff;border-radius:20px;padding:32px;box-shadow:0 25px 70px #0b122758}.lock-card h1{margin:14px 0 9px;font-size:25px}.lock-card p{color:#7e8ba2;line-height:1.9;font-size:12px}.lock-card input{width:100%;border:1px solid #dce4f1;border-radius:10px;padding:13px 14px;margin:13px 0 12px;min-height:46px}.lock-card .btn{width:100%}.lock-card .mark{margin:0 auto}.lock-card{text-align:center}.lock-card .warning{background:#f5f6fa;border-radius:9px;padding:12px;font-size:11px;color:#7b8aa1;margin-top:20px;line-height:1.8}.lock-error{color:#c44450;font-size:12px;min-height:20px;margin-bottom:8px}.lock-card .lock-actions{display:flex;gap:10px;margin-top:11px}.lock-card .lock-actions button{min-height:35px;font-size:11px;background:transparent;border:0;color:#7280c4;flex:1}.app-loading{opacity:.5}
+@media(max-width:1130px){.sidebar{width:220px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-columns{grid-template-columns:1fr 1fr}}@media(max-width:950px){.sidebar{display:none}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);height:calc(63px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);justify-content:space-around;z-index:20}.mobile-nav button{flex:1;border:0;background:none;color:#95a2b4;font-size:22px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px}.mobile-nav small{font-size:10px}.mobile-nav button.active{color:var(--violet)}.mobile-logo{display:flex;align-items:center;gap:10px;font-size:15px}.mobile-logo .mark{width:33px;height:33px;font-size:18px}.crumb{display:none}.top{height:65px;padding:0 20px}.content{padding:27px 20px}.footer{padding-bottom:88px}.dashboard-columns{grid-template-columns:1fr}.settings-grid{grid-template-columns:1fr}}@media(max-width:590px){.content{padding:21px 13px}.top{padding:0 13px}.top-right small{display:none}.top-right .btn{padding:10px 11px;font-size:11px}.page-head{align-items:flex-start;flex-direction:column;margin-bottom:20px;gap:15px}.page-head h1{font-size:24px}.metrics{gap:9px;margin-bottom:12px}.metric{min-height:125px;padding:16px 14px}.metric label{font-size:10px;margin-bottom:17px}.metric strong{font-size:22px}.metric small{font-size:10px;margin-top:11px}.bubble{right:10px;top:12px;width:27px;height:27px;font-size:16px}.panel{padding:19px 16px;margin-bottom:12px}.panel-head h2{font-size:15px}.dashboard-columns{gap:12px}.tile-grid{grid-template-columns:1fr}.field-pair{grid-template-columns:1fr;gap:0}.footer{padding-left:13px;padding-right:13px}.chart{gap:7px}.chart-bars{gap:3px}.task-row{gap:9px}.task-row .badge{display:none}.toolbar input.search{min-width:100%}.lock-card{padding:24px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="logo"><div class="mark">R<span>·</span></div><div><strong>Revenue Desk</strong><small>収益化サイト管理</small></div></div>
+    <div class="menu-caption">WORKSPACE</div>
+    <nav class="nav" aria-label="メニュー">
+      <button data-page="dashboard" class="active"><b>◫</b> ダッシュボード</button>
+      <button data-page="sites"><b>▦</b> サイト管理</button>
+      <button data-page="ledger"><b>↗</b> 収益・費用</button>
+      <button data-page="tasks"><b>☑</b> タスク管理</button>
+      <button data-page="settings"><b>⚙</b> データ管理</button>
+    </nav>
+    <div class="sidebar-bottom"><strong><span class="dot">●</span> 暗号化して端末に保存</strong><small>収益・URL・メモはGitHubへ保存されません。</small></div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <div class="crumb">WORKSPACE / <b id="crumb-title">ダッシュボード</b></div>
+      <div class="mobile-logo"><div class="mark">R<span>·</span></div><b>Revenue Desk</b></div>
+      <div class="top-right"><small><span class="dot">●</span> この端末で暗号化</small><button class="btn primary" data-action="new-site">＋ サイト登録</button></div>
+    </header>
+    <main class="content">
+      <section class="view" id="page-dashboard">
+        <div class="page-head"><div><p class="eyebrow">YOUR BUSINESS AT A GLANCE</p><h1>収益ダッシュボード</h1><p class="intro">独立サイトの広告収益と運営状況をひと目で確認。</p></div><label class="toolbar">表示月 <input id="dashboard-month" type="month"></label></div>
+        <div class="metrics">
+          <div class="metric"><label>今月の収益</label><strong id="metric-income">¥0</strong><small id="income-delta">前月との比較</small><span class="bubble">↗</span></div>
+          <div class="metric"><label>今月の費用</label><strong id="metric-cost">¥0</strong><small>広告・ドメインなどの費用</small><span class="bubble orange">−</span></div>
+          <div class="metric"><label>今月の利益</label><strong id="metric-profit">¥0</strong><small>収益 − 費用</small><span class="bubble green">◈</span></div>
+          <div class="metric"><label>運用中のサイト</label><strong id="metric-active">0</strong><small id="metric-total-sites">全0サイト</small><span class="bubble">▦</span></div>
+        </div>
+        <div class="dashboard-columns">
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">PERFORMANCE</p><h2>収益の推移</h2></div><span class="muted">直近6か月</span></div><div class="legend"><i></i>収益 <i class="cost"></i>費用</div><div class="chart" id="history-chart"></div></article>
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">TARGET</p><h2>月間収益目標</h2></div></div><div id="goal-panel"></div><hr class="separator"><div class="panel-head"><div><p class="tiny-heading">ADS REVIEW</p><h2>広告審査の進捗</h2></div></div><div id="ad-status-panel"></div></article>
+        </div>
+        <div class="dashboard-columns bottom">
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">NEXT ACTIONS</p><h2>優先タスク</h2></div><button class="link-btn" data-page="tasks">すべて見る →</button></div><div id="dashboard-tasks"></div></article>
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">SITES</p><h2>サイト別収益</h2></div><button class="link-btn" data-page="sites">一覧を見る →</button></div><div id="dashboard-sites"></div></article>
+        </div>
+      </section>
+      <section class="view" id="page-sites" hidden>
+        <div class="page-head"><div><p class="eyebrow">PORTFOLIO</p><h1>サイト管理</h1><p class="intro">公開先・広告審査状況・目標額を管理します。</p></div><button class="btn primary" data-action="new-site">＋ 新規登録</button></div>
+        <div class="toolbar"><input class="search" id="site-query" placeholder="サイト名・URLで検索"><select id="site-filter"><option value="all">すべてのサイト</option><option value="active">運用中</option><option value="building">準備中</option><option value="paused">停止中</option></select></div><div class="tile-grid" id="site-cards"></div>
+      </section>
+      <section class="view" id="page-ledger" hidden>
+        <div class="page-head"><div><p class="eyebrow">FINANCIAL LOG</p><h1>収益・費用</h1><p class="intro">AdSense、アフィリエイト、ドメインなどを月ごとに記録。</p></div><button class="btn primary" data-action="new-entry">＋ 記録追加</button></div>
+        <div class="panel"><div class="toolbar"><label>対象月 <input id="ledger-month" type="month"></label><select id="ledger-site" aria-label="サイト絞り込み"></select><span id="ledger-total" style="margin-left:auto;font-weight:800"></span></div></div>
+        <div class="panel"><div class="panel-head"><h2>取引記録</h2><button class="link-btn" data-action="export-csv">CSVを保存 ↗</button></div><div class="table-scroller"><table class="ledger"><thead><tr><th>日付</th><th>サイト</th><th>種別</th><th class="num">収益</th><th class="num">費用</th><th>メモ</th><th>編集</th></tr></thead><tbody id="ledger-rows"></tbody></table></div></div>
+      </section>
+      <section class="view" id="page-tasks" hidden>
+        <div class="page-head"><div><p class="eyebrow">NEXT ACTIONS</p><h1>タスク管理</h1><p class="intro">広告審査、記事改善、サイト更新のやり忘れを防ぎます。</p></div><button class="btn primary" data-action="new-task">＋ タスク追加</button></div>
+        <div class="summary-strips" id="task-summary"></div>
+        <div class="panel"><div class="toolbar"><select id="task-filter"><option value="open">未完了のみ</option><option value="all">すべて</option><option value="done">完了のみ</option></select><select id="task-site"></select></div><div id="task-list"></div></div>
+      </section>
+      <section class="view" id="page-settings" hidden>
+        <div class="page-head"><div><p class="eyebrow">PRIVACY FIRST</p><h1>データ管理</h1><p class="intro">管理データをGitHubには置かず、端末内で暗号化して保存します。</p></div></div>
+        <div class="settings-grid">
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">BACKUP</p><h2>バックアップ・復元</h2></div></div><p class="body-copy">パスフレーズで暗号化されたJSONを保存します。別端末に復元するには、このパスフレーズが必要です。</p><div class="inline-controls"><button class="btn primary" data-action="export-backup">暗号化JSONを保存</button><label class="btn secondary file-label">JSONを取り込む<input type="file" id="import-file" accept=".json,application/json"></label></div><p class="help">初期設定ファイル（平文JSON）も取り込めます。復元すると既存のデータは置き換わります。</p></article>
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">PRIVACY</p><h2>プライバシーと注意点</h2></div></div><p class="body-copy">サイト名、URL、収益、メモ、タスクをGitHubや外部サーバーには送信しません。暗号化した内容をこのブラウザのlocalStorageに保存します。別端末には自動同期されません。</p><p class="help">パスフレーズを忘れると復元できません。コードを実行する同一オリジンの他のページやブラウザ拡張機能がある場合には注意してください。CSVは平文で書き出されます。</p><button class="btn secondary" data-action="lock">画面をロック</button></article>
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">DATA EXPORT</p><h2>CSVダウンロード</h2></div></div><p class="body-copy">すべての収益・費用記録をCSVで出力します。Excelなどで集計できます。CSVは暗号化されません。</p><button class="btn secondary" data-action="export-csv">収支CSVを出力</button></article>
+          <article class="panel"><div class="panel-head"><div><p class="tiny-heading">DANGER ZONE</p><h2>すべての記録を消去</h2></div></div><p class="body-copy">このブラウザに保存された管理データを削除します。削除後に元に戻すことはできません。</p><button class="btn danger" data-action="clear-data">この端末のデータを消去</button></article>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">Revenue Desk · サイト間の公開情報を自動取得しません · 入力データは端末内のみ（暗号化）</footer>
+  </div>
+</div>
+<nav class="mobile-nav" aria-label="モバイルメニュー">
+<button class="active" data-page="dashboard">◫<small>概要</small></button><button data-page="sites">▦<small>サイト</small></button><button data-page="ledger">↗<small>収益</small></button><button data-page="tasks">☑<small>タスク</small></button><button data-page="settings">⚙<small>設定</small></button>
+</nav>
+<dialog id="edit-dialog"><div class="dialog-header"><h2 id="edit-heading">追加</h2><button class="xbtn" data-action="close" aria-label="閉じる">×</button></div><form id="editor-form"><div id="editor-fields"></div><div class="dialog-footer"><button type="button" class="btn secondary" data-action="close">キャンセル</button><button type="submit" class="btn primary">保存する</button></div></form></dialog>
+<div class="toast" id="toast" role="status"></div>
+<div class="lock-screen" id="lock-screen"><form class="lock-card" id="unlock-form"><div class="mark">R<span>·</span></div><h1 id="lock-title">Revenue Desk</h1><p id="lock-info">最初にパスフレーズを設定してください。管理データを暗号化するために使用します。</p><input type="password" id="passphrase" minlength="8" required placeholder="パスフレーズ（8文字以上）" autocomplete="current-password" aria-label="パスフレーズ"><div class="lock-error" id="lock-error"></div><button type="submit" class="btn primary" id="unlock-button">はじめる</button><div class="warning">パスフレーズはサーバーにも端末内にも保存しません。紛失するとデータを復元できません。バックアップを定期的に保存してください。</div><div class="lock-actions"><button type="button" id="locked-import">暗号化バックアップを読み込む</button></div></form></div>
+<script>
+(() => {
+'use strict';
+const KEY='revenue-desk-encrypted-v1', ITERATIONS=220000;
+const $=q=>document.querySelector(q), $$=q=>Array.from(document.querySelectorAll(q));
+const EMPTY=()=>({version:1,sites:[],entries:[],tasks:[]});
+const STATUS={active:'運用中',building:'準備中',paused:'停止中'};
+const ADS={none:'未申請',review:'審査中',approved:'承認済み',rejected:'不承認',na:'対象外'};
+const CHANNELS=['AdSense','アフィリエイト','その他の収益','ドメイン','サーバー','広告費','その他の費用'];
+const money=v=>new Intl.NumberFormat('ja-JP',{style:'currency',currency:'JPY',maximumFractionDigits:0}).format(Number(v)||0);
+const dateToday=()=>{const x=new Date();return [x.getFullYear(),String(x.getMonth()+1).padStart(2,'0'),String(x.getDate()).padStart(2,'0')].join('-');};
+const monthToday=()=>dateToday().slice(0,7);
+const shift=(m,n)=>{const a=m.split('-').map(Number),d=new Date(a[0],a[1]-1+n,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');};
+const id=()=>crypto.randomUUID();
+const h=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&#39;'}[c]));
+const str=(v,max=500)=>String(v||'').trim().slice(0,max);
+const amount=v=>Math.max(0,Math.min(1e12,Number(v)||0));
+const safeUrl=v=>{try{const a=new URL(str(v));return ['https:','http:'].includes(a.protocol)?a.href:'';}catch{return '';}};
+const get=(id)=>document.getElementById(id);
+const escLink=(url,text)=>{const safe=safeUrl(url);return safe?'<a target="_blank" rel="noopener noreferrer" href="'+h(safe)+'">'+h(text)+'</a>':'';};
+const badge=(txt,kind='')=>'<span class="badge '+kind+'">'+h(txt)+'</span>';
+const blank=message=>'<div class="empty"><span class="empty-icon">◇</span><strong>'+h(message)+'</strong>ここに管理データが表示されます。</div>';
+const label=(text,name,value,type='text',required=false)=>'<label class="field"><span>'+h(text)+'</span><input type="'+type+'" name="'+name+'" value="'+h(value==null?'':value)+'" '+(required?'required':'')+'></label>';
+const selectField=(text,name,value,options)=>'<label class="field"><span>'+h(text)+'</span><select name="'+name+'">'+options.map(([k,v])=>'<option value="'+h(k)+'" '+(String(k)===String(value)?'selected':'')+'>'+h(v)+'</option>').join('')+'</select></label>';
+const opts=obj=>Object.entries(obj);
+const enc=new TextEncoder(),dec=new TextDecoder();
+const bytesTo64=bytes=>btoa(Array.from(bytes,x=>String.fromCharCode(x)).join(''));
+const from64=str=>Uint8Array.from(atob(str),c=>c.charCodeAt(0));
+let data=EMPTY(),key=null,salt=null,activePage='dashboard',month=monthToday(),editing={type:null,id:null};
+let saveQueue=Promise.resolve(),ready=false,toastTimeout;
+function toast(msg){get('toast').textContent=msg;get('toast').classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>get('toast').classList.remove('show'),2800);}
+function stored(){try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch{return null;}}
+async function derive(password,s){const base=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt:s,iterations:ITERATIONS},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);}
+function validate(raw){
+if(!raw||typeof raw!=='object'||!Array.isArray(raw.sites)||!Array.isArray(raw.entries)||!Array.isArray(raw.tasks))throw Error('管理データの形式が違います');
+const sites=raw.sites.slice(0,1500).map(x=>({id:str(x.id,100)||id(),name:str(x.name,90),url:safeUrl(x.url),platform:str(x.platform,50),status:STATUS[x.status]?x.status:'building',ads:ADS[x.ads]?x.ads:'none',goal:amount(x.goal),memo:str(x.memo)})).filter(x=>x.name);
+const known=new Set(sites.map(x=>x.id));
+const entries=raw.entries.slice(0,100000).map(x=>({id:str(x.id,100)||id(),siteId:str(x.siteId,100),date:/^\d{4}-\d{2}-\d{2}$/.test(x.date)?x.date:dateToday(),kind:x.kind==='cost'?'cost':'income',channel:CHANNELS.includes(x.channel)?x.channel:'その他の収益',amount:amount(x.amount),memo:str(x.memo)})).filter(x=>known.has(x.siteId));
+const tasks=raw.tasks.slice(0,10000).map(x=>({id:str(x.id,100)||id(),siteId:str(x.siteId,100),title:str(x.title,120),due:/^\d{4}-\d{2}-\d{2}$/.test(x.due)?x.due:'',priority:['high','normal','low'].includes(x.priority)?x.priority:'normal',done:x.done===true})).filter(x=>x.title && (!x.siteId||known.has(x.siteId)));
+return {version:1,sites,entries,tasks};
+}
+async function decrypt(payload,k){const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:from64(payload.iv)},k,from64(payload.data));return validate(JSON.parse(dec.decode(plain)));}
+async function encrypt(raw,k,s){const iv=crypto.getRandomValues(new Uint8Array(12));const content=enc.encode(JSON.stringify(raw));const result=await crypto.subtle.encrypt({name:'AES-GCM',iv},k,content);return {format:'revenue-desk-secure-v1',salt:bytesTo64(s),iv:bytesTo64(iv),data:bytesTo64(new Uint8Array(result))};}
+function persist(){if(!ready)return;const snapshot=JSON.parse(JSON.stringify(data));saveQueue=saveQueue.then(async()=>{const payload=await encrypt(snapshot,key,salt);localStorage.setItem(KEY,JSON.stringify(payload));}).catch(e=>{console.error(e);toast('保存できませんでした。容量などをご確認ください');});}
+function stat(site,m){let income=0,cost=0;for(const e of data.entries){if(e.siteId===site && e.date.startsWith(m)){if(e.kind==='income')income+=e.amount;else cost+=e.amount;}}return {income,cost,profit:income-cost};}
+function total(m){let income=0,cost=0;for(const e of data.entries){if(e.date.startsWith(m)){if(e.kind==='income')income+=e.amount;else cost+=e.amount;}}return {income,cost,profit:income-cost};}
+function go(page){activePage=page;$$('.view').forEach(v=>v.hidden=v.id!=='page-'+page);$$('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const names={dashboard:'ダッシュボード',sites:'サイト管理',ledger:'収益・費用',tasks:'タスク管理',settings:'データ管理'};get('crumb-title').textContent=names[page]||page;render();window.scrollTo(0,0);}
+function render(){
+if(!ready)return;
+get('dashboard-month').value=month;get('ledger-month').value=month;
+renderDashboard();renderSites();renderLedger();renderTasks();
+}
+function renderDashboard(){
+const x=total(month),last=total(shift(month,-1)),active=data.sites.filter(s=>s.status==='active').length;
+get('metric-income').textContent=money(x.income);get('metric-cost').textContent=money(x.cost);get('metric-profit').textContent=money(x.profit);get('metric-active').textContent=active;get('metric-total-sites').textContent='全'+data.sites.length+'サイト';
+get('income-delta').textContent=last.income===0?'前月 '+money(last.income):'前月比 '+((x.income-last.income)/last.income*100).toFixed(0)+'%';
+const months=Array.from({length:6},(_,i)=>shift(month,i-5)),values=months.map(total),max=Math.max(1,...values.map(v=>Math.max(v.income,v.cost)));
+get('history-chart').innerHTML=months.map((m,i)=>'<div class="chart-group"><div class="chart-bars"><span title="'+h(m+' 収益 '+money(values[i].income))+'" style="height:'+((values[i].income/max)*100)+'%"></span><span class="cost" title="'+h(m+' 費用 '+money(values[i].cost))+'" style="height:'+((values[i].cost/max)*100)+'%"></span></div><small>'+h(m.slice(5))+'月</small></div>').join('');
+const goal=data.sites.reduce((n,s)=>n+(s.status==='paused'?0:s.goal),0),pct=goal?Math.min(100,Math.round(x.income/goal*100)):0;
+get('goal-panel').innerHTML='<div class="big-number">'+money(x.income)+' <small>/ '+money(goal)+'</small></div><div class="progress"><div style="width:'+pct+'%"></div></div><p class="muted">'+(goal?'達成率 '+pct+'%':'各サイトの編集画面から目標額を設定できます')+'</p>';
+get('ad-status-panel').innerHTML=['approved','review','rejected','none'].map(st=>'<div class="plain-row"><span>'+h(ADS[st])+'</span><strong>'+data.sites.filter(s=>s.ads===st).length+' 件</strong></div>').join('');
+const todo=data.tasks.filter(t=>!t.done).sort((a,b)=>((a.due||'9999')<(b.due||'9999')?-1:1)).slice(0,5);
+get('dashboard-tasks').innerHTML=todo.length?todo.map(t=>'<div class="plain-row"><div><strong class="truncate">'+h(t.title)+'</strong><small>'+h(siteName(t.siteId))+' · '+h(t.due||'期限なし')+'</small></div>'+badge(t.priority==='high'?'優先':'通常',t.priority==='high'?'red':'gray')+'</div>').join(''):blank('タスクはありません');
+const ranking=data.sites.map(s=>({s,stats:stat(s.id,month)})).sort((a,b)=>b.stats.income-a.stats.income).slice(0,5);
+get('dashboard-sites').innerHTML=ranking.length?ranking.map(r=>'<div class="plain-row"><div><strong class="truncate">'+h(r.s.name)+'</strong><small>'+h(ADS[r.s.ads])+'</small></div><strong>'+money(r.stats.income)+'</strong></div>').join(''):blank('サイトは未登録です');
+}
+function siteName(siteId){return (data.sites.find(s=>s.id===siteId)||{}).name||'共通';}
+function renderSites(){
+const q=get('site-query').value.trim().toLowerCase(),f=get('site-filter').value;
+const filtered=data.sites.filter(s=>(f==='all'||s.status===f)&&(s.name.toLowerCase().includes(q)||s.url.toLowerCase().includes(q)));
+get('site-cards').innerHTML=filtered.length?filtered.map(s=>{
+const st=stat(s.id,month);const url=safeUrl(s.url);
+return '<article class="tile"><div class="tile-title"><div class="tile-icon">'+h(s.name.slice(0,1))+'</div><div><strong>'+h(s.name)+'</strong><small>'+h(s.platform||'独立サイト')+'</small></div></div><div class="tags">'+badge(STATUS[s.status],s.status==='active'?'green':'gray')+badge(ADS[s.ads],s.ads==='approved'?'green':s.ads==='review'?'orange':s.ads==='rejected'?'red':'gray')+'</div><div class="tile-details"><div><small>今月の収益</small><strong>'+money(st.income)+'</strong></div><div><small>月間目標</small><strong>'+money(s.goal)+'</strong></div></div><p class="tile-note">'+h(s.memo||s.url||'メモなし')+'</p><div class="tile-bottom"><span>'+escLink(url,'サイトを開く ↗')+'</span><div class="actions"><button class="btn secondary mini" data-edit="site" data-id="'+h(s.id)+'">編集</button><button class="btn danger mini" data-delete="site" data-id="'+h(s.id)+'">削除</button></div></div></article>';
+}).join(''):blank(data.sites.length?'条件に合うサイトがありません':'サイトを追加してください');
+}
+function updateSiteSelect(selectId,value){const el=get(selectId),old=value===undefined?el.value:value;el.innerHTML='<option value="all">すべてのサイト</option>'+data.sites.map(s=>'<option value="'+h(s.id)+'">'+h(s.name)+'</option>').join('');el.value=(old==='all'||data.sites.some(s=>s.id===old))?old:'all';}
+function renderLedger(){
+updateSiteSelect('ledger-site');const filter=get('ledger-site').value;
+const entries=data.entries.filter(e=>e.date.startsWith(month)&&(filter==='all'||e.siteId===filter)).sort((a,b)=>b.date.localeCompare(a.date));
+const income=entries.filter(e=>e.kind==='income').reduce((n,e)=>n+e.amount,0),cost=entries.filter(e=>e.kind==='cost').reduce((n,e)=>n+e.amount,0);
+get('ledger-total').textContent='利益 '+money(income-cost);
+get('ledger-rows').innerHTML=entries.length?entries.map(e=>'<tr><td>'+h(e.date)+'</td><td>'+h(siteName(e.siteId))+'</td><td>'+h(e.channel)+'</td><td class="num pos">'+(e.kind==='income'?money(e.amount):'—')+'</td><td class="num neg">'+(e.kind==='cost'?money(e.amount):'—')+'</td><td>'+h(e.memo.slice(0,60))+'</td><td><button class="btn mini secondary" data-edit="entry" data-id="'+h(e.id)+'">編集</button> <button class="btn mini danger" data-delete="entry" data-id="'+h(e.id)+'">削除</button></td></tr>').join(''):'<tr><td colspan="7">'+blank('この月の記録はありません')+'</td></tr>';
+}
+function renderTasks(){
+updateSiteSelect('task-site');const f=get('task-filter').value,site=get('task-site').value;
+const open=data.tasks.filter(t=>!t.done),overdue=open.filter(t=>t.due&&t.due<dateToday());
+get('task-summary').innerHTML='<span>未完了 <b>'+open.length+'</b> 件</span><span>期限超過 <b>'+overdue.length+'</b> 件</span><span>完了 <b>'+(data.tasks.length-open.length)+'</b> 件</span>';
+const filtered=data.tasks.filter(t=>(f==='all'||(f==='open'?!t.done:t.done))&&(site==='all'||t.siteId===site)).sort((a,b)=>(a.done-b.done)||(a.due||'9999').localeCompare(b.due||'9999'));
+get('task-list').innerHTML=filtered.length?filtered.map(t=>'<div class="task-row '+(t.done?'done':'')+'"><input type="checkbox" aria-label="完了にする" data-task-toggle="'+h(t.id)+'" '+(t.done?'checked':'')+'><div class="task-info"><strong>'+h(t.title)+'</strong><small>'+h(siteName(t.siteId))+' · '+h(t.due||'期限なし')+'</small></div>'+badge(t.priority==='high'?'高':t.priority==='low'?'低':'中',t.priority==='high'?'red':'gray')+'<div class="actions"><button class="btn mini secondary" data-edit="task" data-id="'+h(t.id)+'">編集</button><button class="btn mini danger" data-delete="task" data-id="'+h(t.id)+'">削除</button></div></div>').join(''):blank('表示するタスクがありません');
+}
+function siteOptions(value){return selectField('対象サイト','siteId',value,[['','共通'],...data.sites.map(s=>[s.id,s.name])]);}
+function edit(type,recordId){
+editing={type,id:recordId||null};let x={};
+if(recordId){x=(type==='site'?data.sites:type==='entry'?data.entries:data.tasks).find(y=>y.id===recordId)||{};}
+if(type==='site'){
+get('edit-heading').textContent=recordId?'サイトを編集':'サイトを追加';
+get('editor-fields').innerHTML=label('サイト名','name',x.name,'text',true)+label('公開URL','url',x.url,'url')+label('公開サービス・カテゴリ','platform',x.platform)+
+'<div class="field-pair">'+selectField('運用状況','status',x.status||'active',opts(STATUS))+selectField('広告審査','ads',x.ads||'none',opts(ADS))+'</div>'+
+label('月間収益目標（円）','goal',x.goal||0,'number')+'<label class="field"><span>メモ</span><textarea name="memo">'+h(x.memo||'')+'</textarea></label>';
+}else if(type==='entry'){
+if(!data.sites.length){toast('先にサイトを登録してください');go('sites');return;}
+get('edit-heading').textContent=recordId?'収支記録を編集':'収支記録を追加';
+get('editor-fields').innerHTML=selectField('対象サイト','siteId',x.siteId||data.sites[0].id,data.sites.map(s=>[s.id,s.name]))+
+'<div class="field-pair">'+label('日付','date',x.date||dateToday(),'date',true)+selectField('種類','kind',x.kind||'income',[['income','収益'],['cost','費用']])+'</div>'+
+selectField('内訳','channel',x.channel||'AdSense',CHANNELS.map(s=>[s,s]))+label('金額（円）','amount',x.amount||0,'number',true)+label('メモ','memo',x.memo);
+}else{
+get('edit-heading').textContent=recordId?'タスクを編集':'タスクを追加';
+get('editor-fields').innerHTML=label('タスク名','title',x.title,'text',true)+siteOptions(x.siteId||'')+
+'<div class="field-pair">'+label('期限','due',x.due||'','date')+selectField('優先度','priority',x.priority||'normal',[['high','高'],['normal','中'],['low','低']])+'</div>';
+}
+get('edit-dialog').showModal();
+}
+function submit(e){
+e.preventDefault();const f=new FormData(e.currentTarget),x=Object.fromEntries(f.entries()),type=editing.type,recordId=editing.id||id();
+if(type==='site'){
+const item={id:recordId,name:str(x.name,90),url:safeUrl(x.url),platform:str(x.platform,50),status:STATUS[x.status]?x.status:'building',ads:ADS[x.ads]?x.ads:'none',goal:amount(x.goal),memo:str(x.memo)};
+if(!item.name){toast('サイト名を入力してください');return;}upsert(data.sites,item);
+}else if(type==='entry'){
+const item={id:recordId,siteId:str(x.siteId,100),date:x.date||dateToday(),kind:x.kind==='cost'?'cost':'income',channel:CHANNELS.includes(x.channel)?x.channel:'その他の収益',amount:amount(x.amount),memo:str(x.memo)};
+if(!data.sites.some(s=>s.id===item.siteId)){toast('サイトを選んでください');return;}upsert(data.entries,item);
+}else if(type==='task'){
+const prev=data.tasks.find(t=>t.id===recordId);
+const item={id:recordId,title:str(x.title,120),siteId:str(x.siteId,100),due:x.due||'',priority:['high','normal','low'].includes(x.priority)?x.priority:'normal',done:prev?prev.done:false};
+if(!item.title){toast('タスク名を入力してください');return;}upsert(data.tasks,item);
+}
+get('edit-dialog').close();persist();render();toast('保存しました');
+}
+function upsert(arr,x){const i=arr.findIndex(y=>y.id===x.id);if(i<0)arr.push(x);else arr[i]=x;}
+function remove(type,itemId){
+const arr=type==='site'?data.sites:type==='entry'?data.entries:data.tasks;
+const item=arr.find(x=>x.id===itemId);if(!item)return;
+if(!confirm('「'+(item.name||item.title||item.date)+'」を削除しますか？'+(type==='site'?' 関連する収益・タスクも削除されます。':'')))return;
+arr.splice(arr.indexOf(item),1);
+if(type==='site'){data.entries=data.entries.filter(x=>x.siteId!==itemId);data.tasks=data.tasks.filter(x=>x.siteId!==itemId);}
+persist();render();toast('削除しました');
+}
+function download(filename,blob){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function downloadBackup(){saveQueue.then(()=>{const s=localStorage.getItem(KEY);if(!s)throw Error('保存データがありません');download('revenue-desk-secure-'+dateToday()+'.json',new Blob([s],{type:'application/json'}));toast('暗号化バックアップを保存しました');}).catch(()=>toast('保存データの出力に失敗しました'));}
+function csvSafe(v){let s=String(v==null?'':v);if(/^[\s]*[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
+function exportCSV(){
+if(!confirm('CSVは暗号化されません。保存しますか？'))return;
+const rows=[['日付','サイト','種類','内訳','金額（円）','メモ'],...data.entries.map(e=>[e.date,siteName(e.siteId),e.kind==='income'?'収益':'費用',e.channel,e.amount,e.memo])];
+download('revenue-desk-ledger-'+dateToday()+'.csv',new Blob(['\ufeff'+rows.map(row=>row.map(csvSafe).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));toast('CSVを保存しました');
+}
+async function importFile(file){
+if(!file)return;
+try{
+if(file.size>10000000)throw Error('ファイルが大きすぎます');
+const obj=JSON.parse(await file.text());
+if(obj.format==='revenue-desk-secure-v1'){
+if(!obj.salt||!obj.iv||!obj.data)throw Error('暗号化ファイルが不正です');
+const pass=prompt('バックアップ作成時のパスフレーズを入力してください');if(!pass)return;
+const importedSalt=from64(obj.salt),importKey=await derive(pass,importedSalt);
+const decrypted=await decrypt(obj,importKey);
+if(!confirm('現在の記録を置き換えて、バックアップを復元しますか？'))return;
+data=decrypted;persist();render();toast('暗号化バックアップを復元しました');
+}else{
+const parsed=validate(obj);
+if(!confirm('平文の初期設定ファイルを取り込みますか？ 現在の記録は置き換わります。'))return;
+data=parsed;persist();render();toast(parsed.sites.length+'サイトを取り込みました');
+}
+}catch(err){console.warn(err);alert('取り込みに失敗しました。ファイル形式・パスフレーズをご確認ください。');}
+}
+function lock(){key=null;salt=null;ready=false;get('lock-screen').hidden=false;get('passphrase').value='';get('lock-error').textContent='';refreshLock();}
+function refreshLock(){const has=!!stored();get('lock-title').textContent=has?'管理画面のロック解除':'Revenue Deskへようこそ';get('lock-info').textContent=has?'パスフレーズで暗号化データを復号します。':'最初にパスフレーズを設定してください。データは暗号化してこの端末に保存されます。';get('unlock-button').textContent=has?'ロック解除':'新しく始める';}
+async function unlock(e){
+e.preventDefault();const pass=get('passphrase').value;
+if(pass.length<8){get('lock-error').textContent='8文字以上で入力してください';return;}
+get('unlock-button').disabled=true;get('lock-error').textContent='';
+try{
+const payload=stored();
+if(payload){if(payload.format!=='revenue-desk-secure-v1')throw Error('保存形式が不正です');salt=from64(payload.salt);key=await derive(pass,salt);data=await decrypt(payload,key);}
+else{salt=crypto.getRandomValues(new Uint8Array(16));key=await derive(pass,salt);data=EMPTY();}
+ready=true;get('lock-screen').hidden=true;get('passphrase').value='';if(!payload)persist();go('dashboard');
+}catch(e){console.warn(e);get('lock-error').textContent='パスフレーズが違うか、保存データが壊れています。';key=null;salt=null;}finally{get('unlock-button').disabled=false;}
+}
+document.addEventListener('click',e=>{
+const page=e.target.closest('[data-page]');if(page){go(page.dataset.page);return;}
+const add=e.target.closest('[data-action]');if(add){
+const action=add.dataset.action;
+if(action==='new-site')edit('site');
+if(action==='new-entry')edit('entry');
+if(action==='new-task')edit('task');
+if(action==='close')get('edit-dialog').close();
+if(action==='export-csv')exportCSV();
+if(action==='export-backup')downloadBackup();
+if(action==='lock')lock();
+if(action==='clear-data'){if(confirm('本当にこの端末の全データを消去しますか？')&&prompt('消去するには「削除」と入力してください')==='削除'){ready=false;saveQueue.then(()=>{localStorage.removeItem(KEY);data=EMPTY();lock();toast('端末の記録を消去しました');});}}
+return;}
+const editButton=e.target.closest('[data-edit]');if(editButton){edit(editButton.dataset.edit,editButton.dataset.id);return;}
+const deleteButton=e.target.closest('[data-delete]');if(deleteButton){remove(deleteButton.dataset.delete,deleteButton.dataset.id);}
+});
+document.addEventListener('change',e=>{
+if(e.target.matches('[data-task-toggle]')){const t=data.tasks.find(t=>t.id===e.target.dataset.taskToggle);if(t){t.done=e.target.checked;persist();render();}}
+if(e.target.id==='dashboard-month'||e.target.id==='ledger-month'){month=e.target.value||monthToday();render();}
+if(e.target.id==='site-filter'||e.target.id==='site-query')renderSites();
+if(e.target.id==='ledger-site')renderLedger();
+if(e.target.id==='task-filter'||e.target.id==='task-site')renderTasks();
+if(e.target.id==='import-file'){importFile(e.target.files[0]);e.target.value='';}
+});
+get('site-query').addEventListener('input',renderSites);
+get('editor-form').addEventListener('submit',submit);
+get('unlock-form').addEventListener('submit',unlock);
+get('locked-import').addEventListener('click',()=>{alert('まずパスフレーズを設定または解除し、その後「データ管理」からJSONを読み込んでください。');});
+get('edit-dialog').addEventListener('click',e=>{if(e.target===get('edit-dialog'))get('edit-dialog').close();});
+refreshLock();
+if(!crypto.subtle){get('lock-error').textContent='暗号化機能が使えません。HTTPSで開いてください。';get('unlock-button').disabled=true;}
+})();
+</script>
+</body>
+</html>
